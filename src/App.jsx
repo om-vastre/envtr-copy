@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './App.css'
 
 function App() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     phone: '',
@@ -53,7 +55,7 @@ function App() {
 
       {/* Header Navigation */}
       <header className="checkout-header">
-        <button className="back-button" aria-label="Go back">
+        <button className="back-button" onClick={() => navigate('/')} aria-label="Go back">
           <svg width="48" height="12" viewBox="0 0 48 12" fill="none">
             <path d="M47.5 6H0M0 6L6 0M0 6L6 12" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>

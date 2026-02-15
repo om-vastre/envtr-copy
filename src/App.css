@@ -1,42 +1,461 @@
-#root {
-  max-width: 1280px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+  background: #FFF;
+}
+
+.checkout-page {
+  position: relative;
+  min-height: 100vh;
+  background: #FFF;
+  overflow-x: hidden;
+}
+
+/* Background Texture */
+.noisy-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.grain-texture {
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+  mix-blend-mode: soft-light;
+  opacity: 0.3;
+}
+
+/* Header */
+.checkout-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+.header-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+
+.icon-button:hover {
+  opacity: 0.8;
+}
+
+/* Main Container */
+.checkout-container {
+  position: relative;
+  z-index: 1;
+  padding: 0 20px 40px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Page Title */
+.page-title {
+  font-family: 'Plaster', cursive;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Progress Steps */
+.progress-steps {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 34px;
+}
+
+.step {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #8A8A8A;
+}
+
+.step.active {
+  color: #000;
+}
+
+/* Form Section */
+.form-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  height: 44px;
+  padding: 12px 20px;
+  border: 1px solid #D9D9D9;
+  background: #FFF;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  color: #5E5E5E;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: #000;
+  color: #000;
+}
+
+.form-input::placeholder {
+  color: #5E5E5E;
+}
+
+.form-select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Shipping Button */
+.shipping-button {
+  width: 100%;
+  height: 44px;
+  background: #D9D9D9;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 21px;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: background-color 0.2s;
+}
+
+.shipping-button:hover {
+  background: #C9C9C9;
+}
+
+.shipping-button span {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+}
+
+/* Order Summary */
+.order-summary {
+  margin-top: 24px;
+  border: 1px solid #D9D9D9;
+  padding: 24px 21px;
+  background: #FFF;
+  position: relative;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.summary-title {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+.item-count {
+  background: rgba(255, 255, 255, 0.88);
+  padding: 7px 10px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #000E8A;
+}
+
+/* Order Items */
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-bottom: 30px;
+}
+
+.order-item {
+  display: flex;
+  gap: 11px;
+}
+
+.item-image {
+  width: 113px;
+  height: 134px;
+  object-fit: cover;
+  border: 1px solid #D9D9D9;
+  flex-shrink: 0;
+}
+
+.item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.item-name {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+}
+
+.change-link {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.change-link:hover {
+  opacity: 0.7;
+}
+
+.item-size {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.66);
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+}
+
+.item-quantity {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #000E8A;
+}
+
+.item-price {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+}
+
+/* Order Totals */
+.order-totals {
+  border-top: 1px solid #D9D9D9;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-row.final {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #D9D9D9;
+}
+
+.total-label {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+}
+
+.total-value {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+
+.total-note {
+  font-family: 'Beatrice Deck Trial', -apple-system, 'Roboto', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.55);
+  text-align: right;
+}
+
+.total-row.final .total-value {
+  font-size: 18px;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+  .checkout-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+    padding: 0 40px 60px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .checkout-form {
+    max-width: 600px;
+  }
+
+  .order-summary {
+    margin-top: 0;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .progress-steps {
+    gap: 80px;
+  }
+
+  .input-row {
+    gap: 12px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .checkout-header {
+    padding: 30px 40px;
+  }
+
+  .checkout-container {
+    grid-template-columns: 1fr 450px;
+    gap: 60px;
+    padding: 0 60px 80px;
+  }
+
+  .checkout-form {
+    max-width: 700px;
+  }
+
+  .page-title {
+    font-size: 28px;
+  }
+
+  .form-input {
+    font-size: 13px;
+  }
+
+  .shipping-button {
+    height: 48px;
+    margin-top: 32px;
+  }
+
+  .shipping-button span {
+    font-size: 16px;
+  }
+
+  .order-summary {
+    padding: 32px 28px;
   }
 }
 
-.card {
-  padding: 2em;
-}
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .checkout-container {
+    grid-template-columns: 1fr 500px;
+    gap: 80px;
+  }
 
-.read-the-docs {
-  color: #888;
+  .checkout-form {
+    max-width: 800px;
+  }
 }
